@@ -73,7 +73,9 @@ void Capabilities::query()
     glGetIntegerv( GL_MAX_TEXTURE_IMAGE_UNITS_ARB, &_shaderUnits );
     glGetIntegerv( GL_MAX_TEXTURE_COORDS_ARB, &_texCoords );
     glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, &_vertexAttribs );
-    //glGetIntegerv( GL_MAX_DRAW_BUFFERS, &_drawBuffers );
+#ifndef IM_OSG_SIZE_REDUCTION
+    glGetIntegerv( GL_MAX_DRAW_BUFFERS, &_drawBuffers );
+#endif // IM_OSG_SIZE_REDUCTION
 }
 
 void Capabilities::dump( std::ostream& ostr ) const
@@ -129,12 +131,12 @@ CapabilitiesSingleton::CapabilitiesSingleton()
             if (!_gc)
             {
                 osg::notify(osg::INFO)<<"Failed to create pbuffer, failing back to normal graphics window."<<std::endl;
-                
+
                 traits->pbuffer = false;
                 _gc = osg::GraphicsContext::createGraphicsContext(traits.get());
             }
 
-            if (_gc.valid()) 
+            if (_gc.valid())
             {
                 _gc->realize();
                 _gc->makeCurrent();
@@ -152,7 +154,7 @@ CapabilitiesSingleton::CapabilitiesSingleton()
                 osg::notify(osg::WARN)<<"Failed to create GC."<<std::endl;
             }
         }
-        
+
         osg::ref_ptr<osg::GraphicsContext> _gc;
     };
 

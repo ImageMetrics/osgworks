@@ -24,10 +24,13 @@
 #include <osg/MatrixTransform>
 #include <osg/Notify>
 
+#ifndef IM_OSG_SIZE_REDUCTION
 #undef BOOST_FOUND
+#endif // IM_OSG_SIZE_REDUCTION
 #ifdef BOOST_FOUND
-//#  include <boost/algorithm/string/replace.hpp>
+#  include <boost/algorithm/string/replace.hpp>
 #endif
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -39,7 +42,7 @@ namespace osgwTools
 
 
 /** \brief A class to enclose a string in double quotes, preserving any double quotes that exist
-in the string. 
+in the string.
 
 If a double quote exists in the string, this code converts it to a pair
 of double quotes. For example:
