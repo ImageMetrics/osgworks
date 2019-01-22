@@ -101,6 +101,12 @@ IF(NOT ANDROID)
     ENDIF()
 ENDIF()
 
+option( IM_SIZE_REDUCTION "Enable Image Metrics Size Reduction code" OFF )
+if( IM_OSG_SIZE_REDUCTION )
+    add_definitions( -DIM_OSG_SIZE_REDUCTION )
+    add_definitions( -DIM_OSG_NO_WRITE_SERIALIZATION )
+    add_definitions( -DIM_OSG_OPENGL_OPTIMIZATION )
+endif()
 
 include( CMakeMacros )
 
@@ -122,7 +128,7 @@ find_package( DirectInput QUIET )
 find_package( VRPN QUIET )
 
 # Add OSG for entire project for include & lib paths
-INCLUDE_DIRECTORIES( 
+INCLUDE_DIRECTORIES(
     ${PROJECT_SOURCE_DIR}/include
     ${OSG_INCLUDE_DIRS}
 )
@@ -172,18 +178,18 @@ if( DOXYGEN_FOUND )
     if( DOXYGEN_DOT_PATH )
         set( HAVE_DOT "YES" )
     endif()
-    
+
     configure_file( ${PROJECT_SOURCE_DIR}/doc/doxyfile.cmake
         ${PROJECT_BINARY_DIR}/doc/doxyfile
     )
     add_custom_target( Documentation ${DOXYGEN_EXECUTABLE}
         ${PROJECT_BINARY_DIR}/doc/doxyfile
     )
-    
+
     add_subdirectory( doc/images )
 endif()
 
-# On windows provide the user with the pdb files 
+# On windows provide the user with the pdb files
 # for debugging if they are present
 if(MSVC)
     install(
@@ -232,12 +238,12 @@ include( CMakePackageConfigHelpers )
 file(RELATIVE_PATH CONF_REL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
    "${CMAKE_INSTALL_PREFIX}/include")
 
-configure_package_config_file( 
+configure_package_config_file(
     osgWorksConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgWorksConfig.cmake
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PATH_VARS CONF_REL_INCLUDE_DIR )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgWorksConfig.cmake 
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgWorksConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgWorksConfigVersion.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/UseosgWorks.cmake
         DESTINATION ${CMAKE_INSTALL_LIBDIR} )
