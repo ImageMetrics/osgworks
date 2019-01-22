@@ -28,7 +28,7 @@
 #undef BOOST_FOUND
 #endif // IM_OSG_SIZE_REDUCTION
 #ifdef BOOST_FOUND
-//#  include <boost/algorithm/string/replace.hpp>
+#  include <boost/algorithm/string/replace.hpp>
 #endif
 
 #include <string>
