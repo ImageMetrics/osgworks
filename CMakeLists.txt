@@ -1,6 +1,5 @@
 # # # # # #  project setup  # # # # # #
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
-set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 PROJECT( osgWorks )
 
 # Note: These values are used by include/osgwTools/Version.in
