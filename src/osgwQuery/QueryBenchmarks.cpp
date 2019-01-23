@@ -57,7 +57,8 @@ QueryBenchmarks::~QueryBenchmarks()
 
 void QueryBenchmarks::internalInit( unsigned int contextID, osg::RenderInfo* ri )
 {
-#ifndef IM_OSG_SIZE_REDUCTION
+// IM: We don't need this
+#if 0
 
    double width, height;
    if( ( ri != NULL ) && ( ri->getCurrentCamera() != NULL ) )
