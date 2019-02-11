@@ -77,16 +77,16 @@ IF(NOT ANDROID)
 
             #set iphone arch and flags taken from http://sites.google.com/site/michaelsafyan/coding/resources/how-to-guides/cross-compile-for-the-iphone/how-to-cross-compile-for-the-iphone-using-cmake
             IF(OSG_BUILD_PLATFORM_IPHONE)
-                SET(CMAKE_OSX_ARCHITECTURES "armv7" CACHE STRING "Build architectures for iOS" FORCE)
-                SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -miphoneos-version-min=5.1 -mno-thumb -arch armv7 -pipe -no-cpp-precomp" CACHE STRING "Flags used by the compiler during all build types." FORCE)
+                SET(CMAKE_OSX_ARCHITECTURES "arm64;arm64e" CACHE STRING "Build architectures for iOS")
+                SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -miphoneos-version-min=5.1 -mno-thumb -pipe -no-cpp-precomp" CACHE STRING "Flags used by the compiler during all build types.")
             ELSE()
                 #simulator uses i386 architectures
-                SET(CMAKE_OSX_ARCHITECTURES "i386" CACHE STRING "Build architectures for iOS Simulator" FORCE)
-                SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-thumb -arch i386 -pipe -no-cpp-precomp" CACHE STRING "Flags used by the compiler during all build types." FORCE)
+                SET(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Build architectures for iOS Simulator")
+                SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-thumb -pipe -no-cpp-precomp" CACHE STRING "Flags used by the compiler during all build types.")
             ENDIF()
 
             #here we set the specific iphone sdk version. We can only set either device or simulator sdk. So if you want both you currently have to have two seperate projects
-            SET(CMAKE_OSX_SYSROOT "${IPHONE_SDKROOT}" CACHE STRING "System root for iOS" FORCE)
+            SET(CMAKE_OSX_SYSROOT "${IPHONE_SDKROOT}" CACHE STRING "System root for iOS")
 
             #hack, force link to opengles
             set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework OpenGLES")
