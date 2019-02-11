@@ -74,7 +74,9 @@ void Capabilities::query()
     glGetIntegerv( GL_MAX_TEXTURE_COORDS_ARB, &_texCoords );
     glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, &_vertexAttribs );
 #ifndef IM_OSG_SIZE_REDUCTION
-    glGetIntegerv( GL_MAX_DRAW_BUFFERS, &_drawBuffers );
+  #if !defined(GL_VERSION_2_0) && !defined(GL_ES_VERSION_2_0)
+    glGetIntegerv(GL_MAX_DRAW_BUFFERS, &_drawBuffers);
+  #endif
 #endif // IM_OSG_SIZE_REDUCTION
 }
 
