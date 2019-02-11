@@ -106,7 +106,6 @@ if( IM_SIZE_REDUCTION )
     message( STATUS "IM_SIZE_REDUCTION is defined!" )
     add_definitions( -DIM_OSG_SIZE_REDUCTION )
     add_definitions( -DIM_OSG_NO_WRITE_SERIALIZATION )
-    add_definitions( -DIM_OSG_OPENGL_OPTIMIZATION )
 endif()
 
 include( CMakeMacros )
